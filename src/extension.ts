@@ -2,8 +2,6 @@
 
 import * as vscode from 'vscode';
 
-var config = vscode.workspace.getConfiguration('favorites');
-
 const log = console.log.bind(console),
       error = console.error.bind(console);
 
