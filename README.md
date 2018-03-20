@@ -6,4 +6,4 @@ Available commands:
 
 - Add to favorites
 - Remove from favorites
-- Open from farorites
+- Open from favorites
