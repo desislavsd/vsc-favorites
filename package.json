@@ -2,10 +2,15 @@
     "name": "vsc-favorites",
     "displayName": "Favorites",
     "description": "Easily access favorite files",
+    "icon": "resources/icon.png",
     "version": "0.0.1",
     "publisher": "Slim",
     "engines": {
         "vscode": "^1.21.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https: //github.com/desislavsd/vsc-favorites.git"
     },
     "categories": [
         "Other"
