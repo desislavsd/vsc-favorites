@@ -1,0 +1,51 @@
+{
+    "name": "vsc-favorites",
+    "displayName": "Favorites",
+    "description": "Easily access favorite files",
+    "version": "0.0.1",
+    "publisher": "Slim",
+    "engines": {
+        "vscode": "^1.21.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:favorites.add",
+        "onCommand:favorites.del",
+        "onCommand:favorites.open"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "favorites.add",
+                "title": "Add to favorites",
+                "category": "Favorites"
+            },
+            {
+                "command": "favorites.del",
+                "title": "Remove from favorites",
+                "category": "Favorites"
+            },
+            {
+                "command": "favorites.open",
+                "title": "Open from favorites",
+                "category": "Favorites"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6",
+        "@types/node": "^7.0.43",
+        "@types/mocha": "^2.2.42"
+    }
+}
