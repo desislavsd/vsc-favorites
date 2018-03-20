@@ -1,6 +1,6 @@
 # vsc-favorites
 
-VSCode extension to easily access your favourite files.
+VSCode extension to easily access your favorite files.
 
 Available commands: 
 
