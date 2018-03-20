@@ -1,6 +1,7 @@
 'use strict';
 
 import * as vscode from 'vscode';
+import * as fs from 'fs'
 
 const log = console.log.bind(console),
       error = console.error.bind(console);
@@ -21,8 +22,7 @@ export function activate(context) {
         
         if(!path) return;
         
-        if(files.includes(path)) 
-            files.splice(files.indexOf(path, 1));
+        remove(path)
 
         files.unshift(path);
 
@@ -36,30 +36,50 @@ export function activate(context) {
         
         if (!path) return;
         
-        if(files.includes(path))
-            files.splice(files.indexOf(path), 1)
-        
+        remove(path);
+
         set(files)
         
         vscode.window.showInformationMessage('Favorites: removed ' + path)
     }
 
+    function remove(path){
+
+        if (files.includes(path))
+            files.splice(files.indexOf(path), 1)
+            
+        return  files;
+    }
+
     function open(editor){
+
+        var path;
         
         vscode.window.showQuickPick(files)
-            .then(file => file || Promise.reject(null))
+            .then(file => (path = file) || Promise.reject(null))
             .then(vscode.workspace.openTextDocument)
             .then(
                 doc => vscode.window.showTextDocument(doc),  
-                err => err && vscode.window.showErrorMessage(err)
+                err => {
+                    if(!err) return ;
+                    vscode.window.showErrorMessage('Favorites: can\'t open ' + path);
+                    set(remove(path));
+                    vscode.window.showInformationMessage('Favorites: remove ' + path);
+                }
             )
     }
 
     function get(){
 
         var files = context.globalState.get('files');
+
+        files = files ? JSON.parse(files) : [];
+
+        files = files.filter(path => fs.existsSync(path))
         
-        return files ? JSON.parse(files) : [];
+        set(files);
+
+        return files;
     }
 
     function set(files){
